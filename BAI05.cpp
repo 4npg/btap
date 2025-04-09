@@ -6,6 +6,11 @@ using namespace std;
 # define oo 1e18
 # define endl "\n"
 # define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
+void READFILE(){
+    freopen("INP.TXT","r",stdin);
+    freopen("OUT.TXT","w",stdout);
+}
+
 int main(){
     fast;
     ll n;cin>>n;
