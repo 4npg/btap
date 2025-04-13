@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+s#include <bits/stdc++.h>
 #pragma GCC optimize("O3,unroll-loops")
 #pragma GCC target("avx,avx2,fma")
 using namespace std;
