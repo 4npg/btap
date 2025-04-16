@@ -2,7 +2,7 @@
 using namespace std;
 #define fast ios_base::sync_with_stdio(false);cin.tie(nullptr)
 const int maxN = 10010;
-
+#define pb push_back
 int n, m;
 vector<int> g[maxN];
 int num[maxN], low[maxN], timer;
@@ -26,13 +26,13 @@ void READFILE(){
     freopen("CAU2.OUT","w",stdout);
 }
 int main() {
-    fast;READFILE();
+    fast;
     cin >> n >> m;
     for (int i = 1; i <= m; i++) {
         int u, v;
         cin >> u >> v;
-        g[u].push_back(v);
-        g[v].push_back(u);
+        g[u].pb(v);
+        g[v].pb(u);
     }
 
     for (int i = 1; i <= n; i++)
