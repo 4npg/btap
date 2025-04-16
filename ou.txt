@@ -1,1 +1,2 @@
--1 -2
+so khop la: 5
+so canh cau la: 10
