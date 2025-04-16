@@ -5,26 +5,23 @@ const int maxN = 10010;
 #define pb push_back
 int n, m;
 vector<int> g[maxN];
-int num[maxN], low[maxN], timer;
-int bridge = 0;
+int id[maxN], low[maxN], cnt;
+int cau = 0;
 
-void dfs(int u, int pre) {
-    num[u] = low[u] = ++timer;
+void dfs(int u, int par) {
+    id[u] = low[u] =cnt++;
     for (int v : g[u]) {
-        if (v == pre) continue;
-        if (!num[v]) {
+        if (v == par) continue;
+        if (!id[v]) {
             dfs(v, u);
             low[u] = min(low[u], low[v]);
-            if (low[v] == num[v]) bridge++;
+            if (low[v] == id[v]) cau++;
         } else {
-            low[u] = min(low[u], num[v]);
+            low[u] = min(low[u], id[v]);
         }
     }
 }
-void READFILE(){
-    freopen("CAU2.INP","r",stdin);
-    freopen("CAU2.OUT","w",stdout);
-}
+
 int main() {
     fast;
     cin >> n >> m;
@@ -36,7 +33,7 @@ int main() {
     }
 
     for (int i = 1; i <= n; i++)
-        if (!num[i]) dfs(i, i);
+        if (!id[i]) dfs(i, i);
 
-    cout<< bridge;
+    cout<< cau;
 }

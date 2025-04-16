@@ -1,47 +1,28 @@
-#include <bits/stdc++.h>
-
+#include<bits/stdc++.h>
 using namespace std;
+#define pb push_back
+#define ll long long
+#define fast ios_base::sync_with_stdio(false);cin.tie(nullptr)
 
-const int maxN = 10010;
+vector<ll> g[5000];
+bool vis[5000];
 
-int n, m;
-bool joint[maxN];
-int timeDfs = 0, bridge = 0;
-int low[maxN], num[maxN];
-vector <int> g[maxN];
+void dfs(ll u){
+    cout<<u<<" ";
+    vis[u] = true;
 
-void dfs(int u, int pre) {
-    int child = 0; // Số lượng con trực tiếp của đỉnh u trong cây DFS
-    num[u] = low[u] = ++timeDfs;
-    for (int v : g[u]) {
-        if (v == pre) continue;
-        if (!num[v]) {
-            dfs(v, u);
-            low[u] = min(low[u], low[v]);
-            if (low[v] == num[v]) bridge++;
-            child++;
-            if (u == pre) { // Nếu u là đỉnh gốc của cây DFS
-                if (child > 1) joint[u] = true;
-            }
-            else if (low[v] >= num[u]) joint[u] = true;
-        }
-        else low[u] = min(low[u], num[v]);
+    for(ll v:g[u]){
+        if(!vis[v])dfs(v);
     }
 }
 
-int main() {
-    cin >> n >> m;
-    for (int i = 1; i <= m; i++) {
-        int u, v;
-        cin >> u >> v;
-        g[u].push_back(v);
-        g[v].push_back(u);
+int main(){
+    fast;
+    ll n,m;cin>>n>>m;
+    for(ll i=1;i<=m;i++){
+        ll u,v;cin>>u>>v;
+        g[u].pb(v);
+        g[v].pb(u);
     }
-    for (int i = 1; i <= n; i++)
-        if (!num[i]) dfs(i, i);
-
-    int cntJoint = 0;
-    for (int i = 1; i <= n; i++) cntJoint += joint[i];
-
-    cout <<"so khop la: "<< cntJoint <<"\nso canh cau la: " << bridge;
+    dfs(1);
 }
