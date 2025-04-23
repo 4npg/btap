@@ -1,28 +1,20 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
+#pragma GCC optimize("O3,unroll-loops")
+#pragma GCC target("avx,avx2,fma")
 using namespace std;
-#define pb push_back
-#define ll long long
-#define fast ios_base::sync_with_stdio(false);cin.tie(nullptr)
-
-vector<ll> g[5000];
-bool vis[5000];
-
-void dfs(ll u){
-    cout<<u<<" ";
-    vis[u] = true;
-
-    for(ll v:g[u]){
-        if(!vis[v])dfs(v);
-    }
-}
-
+# define ll long long
+# define endl "\n"
+# define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
+const ll maxn = 1e6;
+ll dp[maxn];
 int main(){
     fast;
-    ll n,m;cin>>n>>m;
-    for(ll i=1;i<=m;i++){
-        ll u,v;cin>>u>>v;
-        g[u].pb(v);
-        g[v].pb(u);
+    ll n;cin>>n;
+    dp[1] = 1;
+    for (ll i = 1; i <= n; ++i) {
+        for (ll j = 1; j <= n; ++j) {
+            if (j > 1) dp[j] = (dp[j] + dp[j-1]);
+        }
     }
-    dfs(1);
-}
+    cout<<dp[n];
+}       
