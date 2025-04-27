@@ -17,9 +17,8 @@ void ptich(ll n){
 	ll check=0;
 	for(ll i=2;i*i<=n;i++){
 		while(n%i==0){
-			// if(n/i==1)cout<<i<<" ";
-			// else cout<<i<<"*";
-			cout<<i<<"*";
+			if(n/i==1)cout<<i<<" ";
+			else cout<<i<<"*";
 			n/=i;
 		}
 	}

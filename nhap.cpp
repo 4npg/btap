@@ -1,20 +1,26 @@
 #include <bits/stdc++.h>
-#pragma GCC optimize("O3,unroll-loops")
-#pragma GCC target("avx,avx2,fma")
 using namespace std;
-# define ll long long
-# define endl "\n"
-# define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
-const ll maxn = 1e6;
-ll dp[maxn];
-int main(){
-    fast;
-    ll n;cin>>n;
-    dp[1] = 1;
-    for (ll i = 1; i <= n; ++i) {
-        for (ll j = 1; j <= n; ++j) {
-            if (j > 1) dp[j] = (dp[j] + dp[j-1]);
-        }
+
+int main() {
+    // Ví dụ: Một map tên -> tuổi
+    map<string,int> age = {
+        {"Alice", 30},
+        {"Bob",   25},
+        {"Carol", 28}
+    };
+
+    cout << "=== Dùng Structured Binding (C++17) ===\n";
+    for (auto [name, years] : age) {
+        // name  là khóa (first), years là giá trị (second)
+        cout << name << " is " << years << " years old.\n";
     }
-    cout<<dp[n];
-}       
+
+    cout << "\n=== Dùng cách truy xuất truyền thống ===\n";
+    for (const auto &p : age) {
+        const string &name = p.first;
+        int years         = p.second;
+        cout << name << " is " << years << " years old.\n";
+    }
+
+    return 0;
+}
