@@ -1,5 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
+<<<<<<< HEAD
+=======
+#define fast ios_base::sync_with_stdio(false);cin.tie(nullptr);
+>>>>>>> 631e376b7f41c47ebf7e787106da083845c5358f
 #define ll long long
 ll t;
 ll cnt(ll x){
@@ -21,14 +25,22 @@ void ptich(ll n){
 			n/=i;
 		}
 	}
+<<<<<<< HEAD
 	if(n>1)cout<<n<<" ";
+=======
+	if(n>1)cout<<n;
+>>>>>>> 631e376b7f41c47ebf7e787106da083845c5358f
 }
 void READFILE(){
 	freopen("NTO.INP","r",stdin);
 	freopen("NTO.OUT","w",stdout);
 }
 int main(){
+<<<<<<< HEAD
 	READFILE();
+=======
+	fast;
+>>>>>>> 631e376b7f41c47ebf7e787106da083845c5358f
 	cin>>t;
 	for(ll i=0;i<t;i++){
 		ll x;cin>>x;
