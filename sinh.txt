@@ -1,32 +1,42 @@
-Câu Đáp án  Giải thích
-1   A   Chuỗi "abcdeghi" có 8 ký tự, chỉ số cuối là 7.
-2   C   Từ khóa def dùng để định nghĩa hàm trong Python.
-3   D   Hàm trả về giá trị cần return, hàm không trả về có thể có hoặc không.
-4   A   input() trả về chuỗi, dù nhập bất kỳ kiểu dữ liệu nào.
-5   A   Tham số (parameter) được định nghĩa khi khai báo hàm.
-6   B   Đối số (argument) là giá trị/biến truyền vào khi gọi hàm.
-7   C   Đối số phải cùng số lượng và kiểu dữ liệu với tham số.
-8   A   Đối số phải cùng kiểu và số lượng với tham số.
-9   D   Hàm tính tổng các phần tử âm trong danh sách B.
-10  C   Hàm đếm số phần tử khác 0 trong danh sách B.
-11  C   In các số nguyên tố (2, 7, 3, 17, 37) do có ước < 3.
-12  B 
-13  C   Biến trong hàm có phạm vi cục bộ.
-14  B   Biến global có thể đọc trong hàm nhưng không thay đổi được.
-15  C   Tính toán: 8+7+5=20.
-16  D   Tính toán: 4+10+4=18.
-17  A   Biến n trong hàm là local, giá trị ngoài hàm vẫn 4.
-18  A   Tương tự, n toàn cục không đổi (vẫn 5).
-19  D   Trả về 11 (local a), a toàn cục vẫn 10 → 11 10.
-20  C   Dùng global a, a thay đổi thành 11 → 11 11.
-21  B   NameError xảy ra khi tham chiếu tên không tồn tại.
-22  A   TypeError do kiểu dữ liệu không phù hợp.
-23  D   SyntaxError do lỗi cú pháp.
-24  C   ValueError do giá trị không hợp lệ (ví dụ ép kiểu).
-25  B   A[6] vượt quá chỉ số (0–5) → IndexError.
-26 (1)  C   2.5 * 'hello' → TypeError (nhân số thực với chuỗi).
-26 (2)  B   Range viết hoa → NameError (sai cú pháp range).
-27  C   Sai logic: range(1, n, 2) chỉ duyệt số lẻ → bỏ sót ước chẵn.
-28  A   Lỗi ValueError (nhập không phải số) và ZeroDivisionError (chia 0).
-29  C   Kiểm thử giúp tìm lỗi và tăng độ tin cậy.
-30  D   Chạy trên môi trường khác không phải phương pháp kiểm thử.
+5
+5 4 3 2 1   : CHIỀU CAO
+5 4 3 2 1   : ĐIỂM TB
+1 2 3 4 5   : INDEX HS
+
+
+YC1: Sxep CHIỀU CAO TĂNG DẦN
+
+5 4 3 2 1 
+
+YC2: Sxep ĐIỂM TB GIẢM DẦN
+
+1 2 3 4 5
+
+
+5
+2  5 7 1  0    : CHIỀU CAO
+10 9 8 11 15   : ĐIỂM TB
+1  2 3 4  5    : INDEX HS
+
+
+YC1: Sxep CHIỀU CAO TĂNG DẦN
+
+5 4 1 2 3
+
+YC2: Sxep ĐIỂM TB GIẢM DẦN
+
+5 4 1 2 3
+
+
+10
+40 73 91 63 99 50 87 16 36 51   : CHIỀU CAO
+40 58 67 52 78 3  15 9  98 15   : ĐIỂM TB
+1  2  3  4  5  6  7  8  9  10   : INDEX HS
+
+YC1: Sxep CHIỀU CAO TĂNG DẦN
+
+8 9 1 6 10 4 2 7 3 5
+
+YC2: Sxep ĐIỂM TB GIẢM DẦN
+
+9 5 3 2 4 1 7 10 8 6
