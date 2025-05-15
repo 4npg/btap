@@ -1,31 +1,35 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
+#define ll long long
+#define TASK "tenbai"
+#define endl "\n"
+#define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
+#define FOR(i,a,b) for(ll (i)=(a);i<=(b);++i)
+#define LOCAL
 
-int main() {
-    int n = 7;       // Tổng số người
-    int k = 10;      // Giá trị đếm đến khi loại người
-    vector<int> circle;
-    
-    // Khởi tạo danh sách người có số hiệu từ 1 đến 7
-    for (int i = 1; i <= n; i++) {
-        circle.push_back(i);
+#ifdef LOCAL
+  #define dbg(x) do { cerr << "[" << #x << "] = " << (x) << '\n'; } while(0)
+#else
+  #define dbg(x) do {} while(0)
+#endif
+
+
+int32_t main() {
+    fast;
+    if (fopen(TASK ".inp", "r")) {
+        freopen(TASK ".inp", "r", stdin);
+        freopen(TASK ".out", "w", stdout);
     }
-    
-    // Chọn vị trí bắt đầu khác: thay vì bắt đầu từ index 0 (người số 1), 
-    // ta chọn index = 4 (người số 5) nhằm thay đổi thứ tự loại và kết quả cuối cùng.
-    int index = 4;
-    
-    // Mô phỏng quá trình loại người cho đến khi chỉ còn 1 người
-    while (circle.size() > 1) {
-        // Tìm vị trí loại: (index hiện hành + k - 1) mod kích thước danh sách hiện tại
-        index = (index + k - 1) % circle.size();
-        cout << "Loại người số: " << circle[index] << endl; // Hiển thị người bị loại ở bước này
-        circle.erase(circle.begin() + index);
-        // Lưu ý: index hiện hành giữ nguyên vì sau erase, phần tử bên phải chuyển sang vị trí đó.
+    ll t;cin>>t;
+    dbg(t);
+    ll n=1;
+    while(t--){
+        cout<<("Hello ")<<n<<endl;
+        dbg(n);
+        dbg(t);
+        n++;
     }
-    
-    // Kết quả cuối cùng
-    cout << "Người cuối cùng còn lại có số hiệu: " << circle[0] << endl;
-    return 0;
+
 }
+
+
