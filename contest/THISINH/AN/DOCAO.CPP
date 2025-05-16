@@ -34,7 +34,7 @@ int main(){
 	ll n,h;cin>>n>>h;
 	ll cnt=0;
 	for(ll i=2;i<=n;i++){
-		if(sumcs(i)==h&&d[i]==0){
+		if(d[i]==0&&sumcs(i)==h){
 			cout<<i<<"\n";cnt++;
 		}
 	}
