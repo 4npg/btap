@@ -35,7 +35,7 @@ void readfile(){
 
 int main () {
 	fast;
-	READFILE();
+	readfile();
 	ll n; cin >> n;
 	ll h; cin >> h;
 	sang();

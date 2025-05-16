@@ -3,13 +3,12 @@ using namespace std;
 #define ll long long
 #define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
 #define endl "\n"
-
-int main() {
-	void readfile(){
+void readfile(){
 		freopen("TROCHOI.inp","r",stdin);
 		freopen("TROCHOI.out","w",stdout);
 	}
-	fast;
+int main() {
+	fast;readfile();
 	ll n; cin >> n;
 	ll a[n]; ll b[n];
 	for (ll i = 0; i < n; i++) cin>>a[i];
