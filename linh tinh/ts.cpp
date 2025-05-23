@@ -58,10 +58,7 @@ bool xuli2(ll n){
 }
 int32_t main() {
     fast;
-    if (fopen(TASK ".inp", "r")) {
-        freopen(TASK ".inp", "r", stdin);
-        freopen(TASK ".out", "w", stdout);
-    }
+     
     ll n;cin>>n;ll cnt=0;
     sang();
     while(n--){
