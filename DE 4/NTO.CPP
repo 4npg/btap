@@ -29,7 +29,7 @@ void READFILE(){
 	freopen("NTO.OUT","w",stdout);
 }
 int main(){
-	fast;READFILE();
+	fast;
 	cin>>t;
 	for(ll i=0;i<t;i++){
 		ll x;cin>>x;

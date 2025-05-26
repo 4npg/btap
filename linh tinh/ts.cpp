@@ -2,59 +2,47 @@
 using namespace std;
 #define ll long long
 #define TASK "tenbai"
-#define endl "\n"
+#define nl "\n"
 #define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
 #define FOR(i,a,b) for(ll (i)=(a);i<=(b);++i)
 #define LOCAL
+const ll mod = 1e9+7;
+const ll inv2 = (mod + 1) / 2;
+const ll inv3 = (mod + 1) / 3;
+inline ll sq(ll x) { return (x % mod) * (x % mod) % mod; }
 
 #ifdef LOCAL
-  #define dbg(x) do { cerr << "[" << #x << "] = " << (x) << '\n'; } while(0)
+#define dbg(x) do { cerr << "[" << #x << "] = " << (x) << '\n'; } while(0)
 #else
-  #define dbg(x) do {} while(0)
+#define dbg(x) do {} while(0)
 #endif
 
-ll ipow(ll base, ll exp) {
-    ll result = 1;
-    while (exp > 0) {
-        if (exp & 1)            // nếu bit thấp nhất của exp là 1
-            result = result * base;
-        base = base * base;     // bình phương cơ số
-        exp >>= 1;              // dịch exp sang phải 1 bit
-    }
-    return result;
+ll xlb(ll n) {
+    ll m = floor(sqrt(n));
+    ll m1 = (m - 1) % mod;
+
+    ll s1 = m1 * (m % mod) % mod * inv2 % mod;
+    ll s2 = m1 * (m % mod) % mod * ((2 * m - 1) % mod) % mod * inv3 % mod;
+    ll cnt = (m % mod) * ((n % mod - sq(m) + 1 + mod) % mod) % mod;
+
+    return (s1 + s2 + cnt) % mod;
 }
-bool tangorgiam(const string &s){
-    bool inc = true, dec = true;
-    for(int i = 1; i < (int)s.size(); ++i){
-        if(s[i] <= s[i-1]) inc = false;
-        if(s[i] >= s[i-1]) dec = false;
-    }
-    return inc || dec;
-}
-bool nto(ll n){
-    if(n<2)return false;
-    if(n==2||n==3)return true;
-    if(n%2==0||n%3==0)return false;
-    for(ll i=5;i*i<=n;i+=6)if(n%i==0||n%(i+2)==0)return false;
-    return true;
-}
-ll cnt(ll st,ll ed){
-    ll cn=0;
-    FOR(i,st,ed){
-        string str = to_string(i);
-        cn+=((tangorgiam(str)&&nto(i))?1:0);
-    }
-    return cn;
-}
+
 int32_t main() {
     fast;
+    clock_t st,ed;
+    st = clock();
     if (fopen(TASK ".inp", "r")) {
         freopen(TASK ".inp", "r", stdin);
         freopen(TASK ".out", "w", stdout);
     }
-    ll n;cin>>n;
-    ll limit = ipow(10,n)-1,st = ipow(10,n)/10;
-    cout<<cnt(st,limit);
+    ll n, a, b;
+    cin >> n >> a >> b;
+    ll suma = ((a % mod) * ((n % mod) * ((n + 1) % mod) % mod) % mod * inv2) % mod;
+    ll sumb = (b % mod) * xlb(n) % mod;
+    cout << (suma + sumb) % mod;
+    ed = clock();
+
+    double tt = (double)(ed-st)/(double)CLOCKS_PER_SEC;
+    cout<<nl<<(double)tt;
 }
-
-
