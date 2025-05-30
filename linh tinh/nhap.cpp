@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-#define TASK "tenbai"
+#define TASK "taoxau"
 #define endl "\n"
 #define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
 #define FOR(i,a,b) for(ll (i)=(a);i<=(b);++i)
@@ -13,30 +13,27 @@ using namespace std;
   #define dbg(x) do {} while(0)
 #endif
 
-vector<int> tt(const string& s) {
-    int n = s.length();
-    vector<int> l(n, 0);
-    for (int i = 1; i < n; i++) {
-        int j = l[i - 1];
-        while (j > 0 && s[i] != s[j]) {
-            j = l[j - 1];
-        }
-        if (s[i] == s[j]) {
-            j++;
-        }
-        l[i] = j;
-    }
-    return l;
-}
 
-string ans(const string& s) {
-    vector<int> l = tt(s);
-    int n = s.length();
-    int len = n - pi[n - 1]; 
-    if (n % len == 0) {
-        return s.substr(0, len);
+void qhd(ll n, ll m, const string &s) {
+    vector<vector<ll>> dp(n+1, vector<ll>(n+1, 0));
+    dp[0][0] = 1;
+    vector<ll> last(256, 0);
+    for (ll i = 1; i <= n; ++i) {
+        unsigned char c = s[i-1];
+        for (ll k = 0; k <= i; ++k) {
+            dp[i][k] = dp[i-1][k];
+            if (k > 0) {
+                dp[i][k] += dp[i-1][k-1];
+                ll p = last[c];
+                if (p > 0) dp[i][k] -= dp[p-1][k-1];
+                dbg(dp[i][k]);
+            }
+        }
+        last[c] = i;
     }
-    return s;
+    ll res = 0;
+    for (ll k = m; k <= n; ++k) res += dp[n][k];
+    cout<<res;
 }
 
 int32_t main() {
@@ -45,8 +42,10 @@ int32_t main() {
         freopen(TASK ".inp", "r", stdin);
         freopen(TASK ".out", "w", stdout);
     }
+    ll n,m;cin>>n>>m;
     string s;cin>>s;
-    cout<<ans(s);
+    qhd(n,m,s);
 
 }
+
 
