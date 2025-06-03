@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-#define TASK "tenbai"
+#define TASK "PROBLEM-B-THCS"
 #define endl "\n"
 #define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
 #define FOR(i,a,b) for(ll (i)=(a);i<=(b);++i)
@@ -15,6 +15,15 @@ using namespace std;
 
 const int maxn = 2005;
 ll a[maxn][maxn];
+ll n; 
+ll tdc(ll x,ll y){
+    ll res =0;
+    while(x<=n&&y<=n){
+        res+=a[x][y];
+        x++;y++;
+    }
+    return res;
+}
 
 int32_t main() {
     fast;
@@ -22,30 +31,17 @@ int32_t main() {
         freopen(TASK ".inp", "r", stdin);
         freopen(TASK ".out", "w", stdout);
     }
-
-    ll n; cin >> n;
-    FOR(i, 0, n - 1)
-        FOR(j, 0, n - 1)
+    cin>>n;
+    FOR(i, 1, n)
+        FOR(j, 1, n)
             cin >> a[i][j];
 
     ll res = LLONG_MIN;
-    for (ll d = -n + 1; d <= n - 1; ++d) {
-        ll sum = 0;
-        for (ll i = 0; i < n; ++i) {
-            ll j = i - d;
-            if (j >= 0 && j < n) sum += a[i][j];
-        }
-        res = max(res, sum);
+    FOR(i,1,n){
+        res = max(res,tdc(1,i));
     }
-
-    for (ll d = 0; d <= 2 * n - 2; ++d) {
-        ll sum = 0;
-        for (ll i = 0; i < n; ++i) {
-            ll j = d - i;
-            if (j >= 0 && j < n) sum += a[i][j];
-        }
-        res = max(res, sum);
+    FOR(i,1,n){
+        res = max(res,tdc(i,1));
     }
-
     cout << res;
 }
