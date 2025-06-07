@@ -1,0 +1,87 @@
+:root {
+	--accent-000: #080e17;
+	--accent-100: #1ddbf3;
+	--accent-200: #5c53f9;
+	--accent-300: #c239f9;
+	--accent-400: #ebf681;
+
+	--squircle-bg-color: var(--accent-000);
+	--ring-size: 1.5rem;
+
+	font-family: system-ui;
+	color: var(--accent-000);
+	background: currentColor;
+}
+
+*, :after, :before {
+	box-sizing: border-box;
+}
+
+body {
+	height: 100vh;
+	margin: 0;
+	display: grid;
+	place-items: center;
+}
+
+.watch__ring {
+	overflow: clip;
+	position: relative;
+	min-width: 16rem;
+	aspect-ratio: 1/1;
+	padding: var(--ring-size);
+	background-color: var(--ring-color);
+
+	clip-path: shape(from 0% 50%, curve to 50% 0% with 0% 8% / 8% 0%, curve to 100% 50% with 92% 0% / 100% 8%, curve to 50% 100% with 100% 92% / 92% 100%, curve to 0% 50% with 8% 100% / 0% 92%, close);
+
+	@supports not (clip-path: shape(from 0 0, smooth to 0 0)) {
+		border-radius: 33%;
+	}
+}
+.watch__ring--000 { padding: calc(var(--ring-size) * 1.25); --ring-color: var(--accent-000); }
+.watch__ring--100 { --ring-color: var(--accent-100); }
+.watch__ring--200 { --ring-color: var(--accent-200); }
+.watch__ring--300 { --ring-color: var(--accent-300); }
+
+.watch__dial {
+	position: absolute;
+	inset: 12px;
+	color: var(--accent-100);
+	font-size: 2.1rem;
+	line-height: 1;
+	font-weight: 600;
+}
+
+.watch__number {
+	position: absolute;
+	display: inline-block;
+	background-color: var(--accent-000);
+	transform: translate(-50%, -50%);
+	padding: 1rem;
+	display: none;
+}
+.watch__number--t { left: 50%; top: 0; }
+.watch__number--l { left: 0; top: 50%; }
+.watch__number--r { left: 100%; top: 50%; }
+.watch__number--b { left: 50%; top: 100%; }
+
+.watch__finger {
+	position: absolute;
+	inset: -3rem;
+}
+.watch__finger::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: var(--finger-accent);
+	width: 0;
+	padding: var(--ring-size);
+	margin: 0 auto;
+	height: 50%;
+	border: solid;
+	border-width: 0 var(--ring-size);
+}
+.watch__finger--100 { --finger-accent: var(--accent-100); }
+.watch__finger--200 { --finger-accent: var(--accent-200); }
+.watch__finger--300 { --finger-accent: var(--accent-300); }
+.watch__finger--400 { --finger-accent: var(--accent-400); }

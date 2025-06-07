@@ -1,0 +1,142 @@
+:root{
+    --h1-color: #f05123;
+    --h2-color: #f0a123;
+}
+
+a::after{
+            content: " (" attr(href) ")";
+            font-size:3rem;
+}
+
+
+/* Lựa chọn toàn bộ các thẻ */
+* {
+    /* `font-style: italic` là chữ nghiêng */
+    font-style: italic;
+    margin: 0;
+    padding: 0;
+    /* `font-family: sans-serif` là font chữ không chân */
+}
+
+/* Lựa chọn toàn bộ các thẻ p */
+p {
+    /* `text-decoration: underline` là chữ gạch chân */
+    text-decoration: underline;
+}
+
+/* Lựa chọn toàn bộ các thẻ có class-1 */
+.class-1 {
+    color: var(--h1-color);
+}
+
+/* Lựa chọn toàn bộ thẻ đồng thời có cả class-2 và class-3 */
+.class-2.class-3 {
+    color: green;
+    text-decoration: dashed underline;
+}
+
+/* Lựa chọn thẻ có class-5 là con của thẻ class-4 */
+.class-4 .class-5 {
+    color: var(--h2-color);
+}
+
+/* Lựa chọn toàn bộ các thẻ p có class-6 */
+p.class-6 {
+    color: blue;
+}
+
+/* Lựa chọn toàn bộ các thẻ h3, h4 */
+h3, h4 {
+    color: brown;
+}
+
+/* Lựa chọn toàn bộ thẻ li là con của class list */
+.list li {
+    color: deepskyblue;
+}
+
+/* Lựa chọn toàn bộ thẻ li là con trực tiếp của thẻ có class list */
+.list > li {
+    color: fuchsia;
+}
+
+/* Lựa chọn 1 thẻ p đứng liền kề sau class-9 */
+.class-9 + p {
+    color: goldenrod;
+}
+
+/* Lựa chọn toàn bộ thẻ p đứng sau class-10 */
+.class-10 ~ .class-11 {
+    color: limegreen;
+}
+
+
+
+/**
+* Các bạn chưa cần học phần dưới này, đây là
+* CSS selectors nâng cao, mình sử dụng để
+* hiển thị tên class bên cạnh mỗi đoạn văn
+* trên giao diện.
+*/
+
+ /* [class]::after {
+    content: " ("  attr(class) ")";
+}  */
+
+html{
+    font-size: 62.5%;
+    /* font size = 62.5% thì 1rem=10px 2rem=20px 2.5rem = 25px  */
+}
+
+
+
+div{
+    border: 3px solid black;
+    max-width: 75%;
+    font-size:3rem;
+    padding: 1em;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container1{
+    height: 400px;
+    background-color: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container2{
+    height:400px;
+    background-color: white;
+}
+
+
+.box1,.box2 {
+    height: 40%;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: green;
+    padding: 50px;
+    margin: 20px;
+}
+
+
+
+.box3,.box5 {
+    width: 200px;
+    height: 50%;
+    background-color: brown;
+    padding: 10px;
+    margin: 10px;
+}
+
+.box4 {
+    width: 100%;
+    height: 100px;
+    background-color: orange;
+}
