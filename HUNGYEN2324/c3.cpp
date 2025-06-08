@@ -13,7 +13,11 @@ using namespace std;
   #define dbg(x) do {} while(0)
 #endif
 
-
+ll prime(ll n){
+  if(n<2)return false;
+  for(ll i=2;i*i<=n;i++)if(n%i==0)return false;
+    return true;
+}
 int32_t main() {
     fast;
     if (fopen(TASK ".inp", "r")) {
@@ -21,9 +25,15 @@ int32_t main() {
         freopen(TASK ".out", "w", stdout);
     }
     ll n;cin>>n;
-    string str;cin>>str;
-    
-
+    for(ll i=2;i*i<=n;i++){
+      if(n%i==0){
+        while(n%i==0){
+          cout<<i<<" ";
+          n/=i;
+        }
+      }
+    }
+    if(n>1)cout<<n;
 }
 
 
