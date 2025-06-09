@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-#define TASK "tenbai"
+#define TASK "FACTORIAL"
 #define endl "\n"
 #define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
 #define FOR(i,a,b) for(ll (i)=(a);i<=(b);++i)
@@ -23,7 +23,7 @@ int32_t main() {
         freopen(TASK ".out", "w", stdout);
     }
 
-    ll n = (1ll*1e18);
+    ll n;cin>>n;
     if (n > MAX_T) n = MAX_T;
  
     ll sum = 0;
@@ -31,7 +31,6 @@ int32_t main() {
     for (ll i = 1; i <= n; ++i) {
         fact = (fact * i) % mod;
         sum = (sum + fact) % mod;
-        cout<<sum<<", i = "<<i<<"\n";
     }
 
     cout << sum;

@@ -17,7 +17,7 @@ i=1, x=-6, mod=2, res=0, prf=1
 i=2, x=1, mod=0, res=1, prf=1
 xuất hiện dãy con thứ 2
 i=3, x=9, mod=0, res=2, prf=2
-xuất hiện thêm hai dãy con
+xuất hiện thêm hai dãy con  
 i=4, x=-3, mod=0, res=4, prf=3
 xuất hiện thêm 3 dãy con
 7
