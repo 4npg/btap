@@ -45,7 +45,6 @@ int32_t main() {
                 lo = mid + 1;
             }
         }
-
         cout << ans;
 
     }

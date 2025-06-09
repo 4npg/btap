@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-#define TASK "tenbai"
+#define TASK "gcdmax"
 #define endl "\n"
 #define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
 #define FOR(i,a,b) for(ll (i)=(a);i<=(b);++i)
@@ -13,8 +13,7 @@ using namespace std;
   #define dbg(x) do {} while(0)
 #endif
 
-const ll mod = 20240131;
-const ll MAX_T = 243856;
+
 
 int32_t main() {
     fast;
@@ -23,16 +22,11 @@ int32_t main() {
         freopen(TASK ".out", "w", stdout);
     }
 
-    ll n = (1ll*1e18);
-    if (n > MAX_T) n = MAX_T;
- 
-    ll sum = 0;
-    ll fact = 1;
-    for (ll i = 1; i <= n; ++i) {
-        fact = (fact * i) % mod;
-        sum = (sum + fact) % mod;
-        cout<<sum<<", i = "<<i<<"\n";
+    ll q;cin>>q;
+    while(q--){
+    	ll x;cin>>x;
+    	cout<<(x>>1)<<endl;
     }
-
-    cout << sum;
 }
+
+

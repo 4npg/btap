@@ -1,7 +1,23 @@
-4
-2 3
-3 2
-2 2
-1 3
+5 3
+2 -6 1 9 -3
 
-res = 3
+2 -6 1 9 -3
+dãy 1: -6
+dãy 2: 2 -6 1
+dãy 3: 2-6 1 9
+dãy 4: 9
+dãy 5: 2 -6 1 9 -3
+dãy 6: 9 -3
+dãy 7: -3
+
+
+i=0, x=2, mod=2, res=0, prf=0
+i=1, x=-6, mod=2, res=0, prf=1
+đã xuất hiện 1 dãy con
+i=2, x=1, mod=0, res=1, prf=1
+xuất hiện dãy con thứ 2
+i=3, x=9, mod=0, res=2, prf=2
+xuất hiện thêm hai dãy con
+i=4, x=-3, mod=0, res=4, prf=3
+xuất hiện thêm 3 dãy con
+7

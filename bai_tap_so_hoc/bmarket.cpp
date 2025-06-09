@@ -13,8 +13,6 @@ using namespace std;
   #define dbg(x) do {} while(0)
 #endif
 
-const ll mod = 20240131;
-const ll MAX_T = 243856;
 
 int32_t main() {
     fast;
@@ -22,17 +20,17 @@ int32_t main() {
         freopen(TASK ".inp", "r", stdin);
         freopen(TASK ".out", "w", stdout);
     }
+    ll y,k,n;
+    cin>>y>>k>>n;
+    ll stnum = ((y + k) / k) * k;
+    bool ok = false;
 
-    ll n = (1ll*1e18);
-    if (n > MAX_T) n = MAX_T;
- 
-    ll sum = 0;
-    ll fact = 1;
-    for (ll i = 1; i <= n; ++i) {
-        fact = (fact * i) % mod;
-        sum = (sum + fact) % mod;
-        cout<<sum<<", i = "<<i<<"\n";
+    for (ll i = stnum; i <= n; i += k) {
+        cout << i - y << " ";
+        ok = true;
     }
 
-    cout << sum;
+    if (!ok) cout << "-1";
 }
+
+
