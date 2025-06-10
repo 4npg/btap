@@ -61,6 +61,31 @@ void egcd(ll a,ll b){
     // cout<<a<<" "<<b<<" "<<x<<" "<<y<<" "<<a*x+b*x<<"\n";
 
 }
+
+
+ll phi(ll n){
+    ll ans = n;
+    for(ll i=2;i*i<=n;i++){
+        if(n%i==0){
+            ans-=ans/i;
+            while(n%i==0)n/=i;
+        }
+    }
+    if(n>1){
+        ans-=ans/n;
+    }
+    return ans;
+}
+
+void phisang(){
+    for(ll i=2;i<maxn;i++){
+        if(d[i]==i){
+            for(ll j=i;j<maxn;j+=i){
+                d[j]-=d[j]/i;
+            }
+        }
+    }
+}
 int main(){
     fast;
     egcd(240,46);

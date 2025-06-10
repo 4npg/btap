@@ -19,6 +19,19 @@ ll ipow(ll a, ll b) {
     return res;
 }
 
+ll x, y;
+void egcd(ll a, ll b) {
+    if (b == 0) { x = 1; y = 0; return; }
+    egcd(b, a % b);
+    ll temp = x;
+    x = y;
+    y = temp - a / b * y;
+}
+ll inv(ll a, ll m) {
+    egcd(a, m);
+    return (x % m + m) % m;
+}
+
 
 int32_t main() {
     fast;
@@ -32,7 +45,7 @@ int32_t main() {
 
     if (r == 1) {
         cout << n % mod << endl;
-    }else {
-        cout << (1 - ipow(r, n) + mod) % mod * ipow((1 - r + mod) % mod, 1631) % mod;
+    } else {
+        cout << (1-ipow(r,n)+mod)%mod * inv((1-r+mod)%mod,mod) % mod;
     }
 }
