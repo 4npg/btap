@@ -1,1 +1,2 @@
-abcdefghabck
+6 2
+3 5 5 5 10 7
