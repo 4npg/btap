@@ -1,4 +1,3 @@
-// cap so nhan, nghich dao modulo, luy thua nhi phan, euclid mo rong
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
@@ -7,6 +6,7 @@ using namespace std;
 #define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
 
 const ll mod = 2023;
+ll n, r;
 
 ll ipow(ll a, ll b) {
     ll res = 1;
@@ -19,6 +19,19 @@ ll ipow(ll a, ll b) {
     return res;
 }
 
+ll gcd(ll a,ll b){
+    if(b==0)return a;
+    return gcd(b,a%b);
+}
+
+void khongconghichdao() {
+    ll lt = 1, sum = 1;
+    for (ll i = 1; i < n; i++) {
+        lt = (lt * r) % mod;
+        sum = (sum + lt) % mod;
+    }
+    cout << sum;
+}
 
 int32_t main() {
     fast;
@@ -27,12 +40,22 @@ int32_t main() {
         freopen(TASK ".out", "w", stdout);
     }
 
-    ll n, r;
     cin >> n >> r;
 
     if (r == 1) {
         cout << n % mod << endl;
-    }else {
-        cout << (1 - ipow(r, n) + mod) % mod * ipow((1 - r + mod) % mod, 1631) % mod;
+    } else {
+        if (n <= 1000000) {
+            khongconghichdao();
+        } else {
+            ll mau = (1 - r + mod) % mod;
+            if (gcd(mau, mod) != 1) {
+                khongconghichdao();
+            } else {
+                ll tu = (1 - ipow(r, n) % mod + mod) % mod;
+                ll inv = ipow(mau, 1631);
+                cout << tu * inv % mod << endl;
+            }
+        }
     }
 }
