@@ -1,12 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-#define TASK "TERACING"
+#define TASK "tenbai"
 #define nl cout<<"\n"
 #define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
 #define FOR(a,b) for(ll i=(a);i<=(b);++i)
-#define fi first
-#define se seconds
+#define bit(mask,i) ((mask>>i)&1)
+
+ll a[20],s,ans,n;
+
 
 int32_t main() {
     fast;
@@ -14,19 +16,13 @@ int32_t main() {
         freopen(TASK ".inp", "r", stdin);
         freopen(TASK ".out", "w", stdout);
     }
-    ll n,k;cin>>n>>k;
-    unordered_map<ll,ll> freq;
-    FOR(0,n-1){
-        ll x;cin>>x;
-        freq[x]++;
+    cin>>n;
+    FOR(0,n-1)cin>>a[i];
+    FOR(0,(1>>n)-1){
+        ll sum =0;
+        for(ll j=0;j<n;j++)if(bit(i,j))sum+=a[j];
+            ans+=(s==sum);
     }
-    ll res = 0;
-    for(auto &x:freq){
-        if(freq.count(x.fi+k)){
-            res+=1ll*x.se*freq[x.fi+k];
-        }
-    }
-    cout<<res;
 }
 
 

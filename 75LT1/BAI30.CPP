@@ -1,12 +1,19 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-#define TASK "TERACING"
+#define TASK "tenbai"
 #define nl cout<<"\n"
 #define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
 #define FOR(a,b) for(ll i=(a);i<=(b);++i)
-#define fi first
-#define se seconds
+
+
+ll dem(ll n, ll k) {
+    if ((n + k) % 2 != 0 || n <= k) return 1;
+    ll x = (n + k) / 2;
+    ll y = (n - k) / 2;
+    if (x <= 0 || y <= 0) return 1;
+    return dem(x, k) + dem(y, k);
+}
 
 int32_t main() {
     fast;
@@ -15,18 +22,8 @@ int32_t main() {
         freopen(TASK ".out", "w", stdout);
     }
     ll n,k;cin>>n>>k;
-    unordered_map<ll,ll> freq;
-    FOR(0,n-1){
-        ll x;cin>>x;
-        freq[x]++;
-    }
-    ll res = 0;
-    for(auto &x:freq){
-        if(freq.count(x.fi+k)){
-            res+=1ll*x.se*freq[x.fi+k];
-        }
-    }
-    cout<<res;
+    cout<<dem(n,k);
+
 }
 
 
