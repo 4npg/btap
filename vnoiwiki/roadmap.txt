@@ -1,0 +1,8 @@
+chạy trâu 
+mảng cộng dồn
+chặt np 
+mảng hiệu
+2 con trỏ
+số học, xử lý xâu, quay lui, nhánh cận, segtree
+QHĐ (thuần, LIS, LCS, dp range), hasing, DFS, BFS
+dijkstra, dp trên cây, DSU, Cây khung + lca

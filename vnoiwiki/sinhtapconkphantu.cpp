@@ -24,10 +24,10 @@ void sinhquaylui(ll pos){
     FOR(i,lastnum+1,n){
         cur_subset.pb(i);
         if(cur_subset.size()==k){
-            // sort(all(cur_subset));
-            // do{
+            sort(all(cur_subset));
+            do{
                 print_subset();
-            // }while(next_permutation(all(cur_subset)));
+            }while(next_permutation(all(cur_subset)));
 
         }
         else sinhquaylui(pos+1);
@@ -35,19 +35,24 @@ void sinhquaylui(ll pos){
     }
 }
 
-void bitmask(ll n){
-    vector<ll> s(n);
+void bitmask(ll n,ll k){
+    vector<ll>s(n);
     FOR(i,0,n-1)s[i]=i+1;
-    ll mask = (1<<n)-1;
-    vector<ll> perm;
-    FOR(i,0,n-1){
-       if(bit(mask,i))perm.pb(s[i]); 
+    ll total = (1ll<<n)-1;
+    FOR(mask,0,total){
+        if(__builtin_popcount(mask)==k){
+            vector<ll>perm;
+            FOR(i,0,n-1)if(bit(mask,i)){
+
+                perm.pb(s[i]);
+
+            }
+            do{
+                for(auto x:perm)cout<<x<<" ";
+                nl;   
+            }while(next_permutation(all(perm)));
+        }
     }
-    sort(all(perm));
-    do{
-        for(auto x:perm)cout<<x;
-        cout<<' ';
-    }while(next_permutation(all(perm)));
 }
 
 int32_t main() {
@@ -56,10 +61,10 @@ int32_t main() {
         freopen(TASK ".inp", "r", stdin);
         freopen(TASK ".out", "w", stdout);
     }
-    cin>>n;
+    cin>>n>>k;
     // cur_subset.clear();
     // sinhquaylui(1);
-    bitmask(n);
+    bitmask(n,k);
 }
 
 
