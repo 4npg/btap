@@ -11,7 +11,7 @@ ll tinhtien(ll c, ll k) {
     for (ll i = 0; i < k; ++i) t *= 10;
     return ((c + t / 2) / t) * t;
 }
-
+ 
 
 
 int32_t main() {
