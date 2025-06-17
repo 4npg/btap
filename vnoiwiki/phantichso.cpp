@@ -11,7 +11,7 @@ using namespace std;
 #define pob pop_back
 
 ll n,s,a[20],sum;
-vector<ll> curmo;
+vector<ll> curmo,bestset;
 
 void print(){
 	for(auto x:curmo)cout<<a[x]<<" ";
@@ -23,10 +23,12 @@ void ql(){
 	FOR(i,lastindex,n-1){
 		curmo.pb(i);
 		sum += a[i];
-		if(sum>=s){
-			if(sum==s)print();
-		}else{
-			ql();
+		if (sum == s) {
+		    if (bestset.empty() || curmo.size() < bestset.size()) {
+		        bestset = curmo;
+		    }
+		} else if (sum < s && (bestset.empty() || curmo.size() < bestset.size())) {
+		    ql();
 		}
 		curmo.pob();
 		sum-=a[i];
@@ -43,7 +45,11 @@ int32_t main() {
     FOR(i,0,n-1)cin>>a[i];
     curmo.clear();
     sum = 0;
-    ql();
+    bestset.clear();
+	ql();
+	for(auto i:bestset){
+		cout<<a[i]<<" ";
+	}
 }
 
 
