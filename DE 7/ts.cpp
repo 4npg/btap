@@ -1,30 +1,48 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-#define ll long long
-#define TASK "tenbai"
-#define nl cout<<"\n"
-#define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
-#define FOR(a,b) for(ll i=(a);i<=(b);++i)
+#define FOR(i, a, b) for(int i = (a); i < (b); i++)
+#define REP(i, a, b) for(int i = (a); i <=(b); i++)
+#define int64 long long
+#define fast ios_base::sync_with_stdio(false);cin.tie(nullptr)
+const int N = 1000006;
+char a[N], b[N];
+int MOD;
 
-
-ll dq(ll n){
-    if(n==0)return n;
-    return n*dq(n-1);
+bool isPrime(int x) {
+    REP(i, 2, sqrt(x))
+        if (x % i == 0) return 0;
+   return 1; 
 }
 
-ll fib(ll n){
-    if(n==0||n==1)return n;
-    return fib(n-1)+fib(n-2);
-}
-
-int32_t main() {
-    fast;
-    if (fopen(TASK ".inp", "r")) {
-        freopen(TASK ".inp", "r", stdin);
-        freopen(TASK ".out", "w", stdout);
+int Phi(int n){
+    int ans = n;
+    REP(i,2,sqrt(n)){
+        if(n%i==0)ans-=ans/i;
+        while(n%i==0)n/=i;
     }
-
-
+    if(n>1)ans-=ans/n;
+    return ans;
 }
 
+int bigMod(char *s, int mod) {
+    int64 ans = 0, n = strlen(s);
+    FOR(i, 0, n) ans = (ans * 10 + s[i] - '0') % mod;
+    return ans;
+}
 
+int POW(int a, int p) {
+    if (p == 1) return a;
+    int64 x = POW(a, p >> 1);
+    x = x * x % MOD;
+    if (p & 1) x = x * a % MOD;
+    return x;
+}
+
+int main() {
+    fast;
+    cin >> a; cin >> b; cin >> MOD;
+    int phi = Phi(MOD);
+    int aa = bigMod(a, MOD);
+    int bb = bigMod(b, phi);
+    cout << POW(aa, bb);
+}

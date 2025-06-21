@@ -55,7 +55,7 @@ int32_t main() {
     bool found = false;
 
     for (ll t = from; t <= to; ++t) {
-        ll delta = t - startDay;
+        ll delta = t - starptDay;
         if (delta < 0) continue;
         ll cnt = 0;
         if (delta % 23 == 0) cnt++;
