@@ -62,9 +62,9 @@ int32_t main() {
         freopen(TASK ".out", "w", stdout);
     }
     cin>>n>>k;
-    // cur_subset.clear();
-    // sinhquaylui(1);
-    bitmask(n,k);
+    cur_subset.clear();
+    sinhquaylui(1);
+    // bitmask(n,k);
 }
 
 

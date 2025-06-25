@@ -6,7 +6,7 @@ using namespace std;
 #define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
 #define FOR(a,b) for(ll i=(a);i<=(b);++i)
 #define fi first
-#define se seconds
+#define se second
 
 int32_t main() {
     fast;

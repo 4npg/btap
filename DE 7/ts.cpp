@@ -1,48 +1,58 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-#define FOR(i, a, b) for(int i = (a); i < (b); i++)
-#define REP(i, a, b) for(int i = (a); i <=(b); i++)
-#define int64 long long
-#define fast ios_base::sync_with_stdio(false);cin.tie(nullptr)
-const int N = 1000006;
-char a[N], b[N];
-int MOD;
+#define ll long long
+#define TASK "tenbai"
+#define nl cout<<"\n"
+#define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
+#define FOR(i,a,b) for(int (i)=(a);i<=(b);++i)
 
-bool isPrime(int x) {
-    REP(i, 2, sqrt(x))
-        if (x % i == 0) return 0;
-   return 1; 
-}
+bool isInCol[9][10],isInRow[9][10],isIn3x3[9][9][10];
+int a[9][9];
 
-int Phi(int n){
-    int ans = n;
-    REP(i,2,sqrt(n)){
-        if(n%i==0)ans-=ans/i;
-        while(n%i==0)n/=i;
+
+bool solve(int row=0,int col=0){
+    if(row==9)return true;
+    if(col==9)return solve(row+1,0);
+    if(a[row][col]!=0)return solve(row,col+1);
+
+
+    FOR(i,1,9){
+        if(!isInRow[row][i]&&!isInCol[col][i]&&!isIn3x3[row/3][col/3][i]){
+            a[row][col]=i;
+            isInRow[row][i] = isInCol[col][i] = isIn3x3[row/3][col/3][i] = true;
+
+            if(solve(row,col+1))return true;
+
+            a[row][col]=0;
+            isInCol[col][i]=isInRow[row][i]=isIn3x3[row/3][col/3][i]=false;
+        }
     }
-    if(n>1)ans-=ans/n;
-    return ans;
+    return false;
 }
 
-int bigMod(char *s, int mod) {
-    int64 ans = 0, n = strlen(s);
-    FOR(i, 0, n) ans = (ans * 10 + s[i] - '0') % mod;
-    return ans;
-}
-
-int POW(int a, int p) {
-    if (p == 1) return a;
-    int64 x = POW(a, p >> 1);
-    x = x * x % MOD;
-    if (p & 1) x = x * a % MOD;
-    return x;
-}
-
-int main() {
+int32_t main() {
     fast;
-    cin >> a; cin >> b; cin >> MOD;
-    int phi = Phi(MOD);
-    int aa = bigMod(a, MOD);
-    int bb = bigMod(b, phi);
-    cout << POW(aa, bb);
+    if (fopen(TASK ".inp", "r")) {
+        freopen(TASK ".inp", "r", stdin);
+        freopen(TASK ".out", "w", stdout);
+    }
+    FOR(i,0,8){
+        FOR(j,0,8){
+            cin>>a[i][j];
+            ll num = a[i][j];
+            if(num){
+                isInRow[i][num]=true;
+                isInCol[j][num]=true;
+                isIn3x3[i/3][j/3][num]=true;
+            }
+        } 
+    }
+    if(solve())
+    FOR(i,0,8){
+        FOR(j,0,8)
+            cout<<a[i][j]<<" ";
+        nl;
+    }
 }
+
+
