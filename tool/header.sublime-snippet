@@ -1,20 +1,13 @@
 <snippet>
 	<content><![CDATA[
+// authur : anphung iu bcu
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
 #define TASK "tenbai"
-#define endl "\n"
+#define el "\n"
 #define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
 #define FOR(i,a,b) for(ll (i)=(a);i<=(b);++i)
-#define LOCAL
-
-#ifdef LOCAL
-  #define dbg(x) do { cerr << "[" << #x << "] = " << (x) << '\n'; } while(0)
-#else
-  #define dbg(x) do {} while(0)
-#endif
-
 
 int32_t main() {
     fast;

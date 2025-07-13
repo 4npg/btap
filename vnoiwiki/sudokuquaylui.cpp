@@ -2,27 +2,30 @@
 using namespace std;
 #define ll long long
 #define TASK "tenbai"
-#define nl cout << "\n"
+#define nl cout<<"\n"
 #define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
-#define FOR(i, a, b) for (ll i = (a); i <= (b); ++i)
+#define FOR(i,a,b) for(int (i)=(a);i<=(b);++i)
 
-bool isInCol[9][10], isInRow[9][10], isInBox[3][3][10];
-ll board[9][9];
+bool isInCol[9][10],isInRow[9][10],isIn3x3[9][9][10];
+int a[9][9];
 
-bool solve(ll r = 0, ll c = 0) {
-    if (r == 9) return true;
-    if (c == 9) return solve(r + 1, 0);
-    if (board[r][c] != 0) return solve(r, c + 1);
 
-    FOR(num, 1, 9) {
-        if (!isInRow[r][num] && !isInCol[c][num] && !isInBox[r / 3][c / 3][num]) {
-            board[r][c] = num;
-            isInRow[r][num] = isInCol[c][num] = isInBox[r / 3][c / 3][num] = true;
+bool solve(int row=0,int col=0){
+    if(row==9)return true; //đủ 9 hàng thì out
+    if(col==9)return solve(row+1,0); // đạt cột thứ 9 thì quay lui xuống hàng tiếp theo
+    if(a[row][col]!=0)return solve(row,col+1); // nếu ô có giá trị khac 0 rồi thì nhảy sang cột tiếp theo của hàng hiện thời
 
-            if (solve(r, c + 1)) return true;
 
-            board[r][c] = 0;
-            isInRow[r][num] = isInCol[c][num] = isInBox[r / 3][c / 3][num] = false;
+    FOR(i,1,9){ //bắt đầu quá trình điền số
+        if(!isInRow[row][i]&&!isInCol[col][i]&&!isIn3x3[row/3][col/3][i]){ // nếu các ô và cột có số != 0 thì xét
+            a[row][col]=i; //giá trị ở cột a[row][col] = i
+            isInRow[row][i] = isInCol[col][i] = isIn3x3[row/3][col/3][i] = true; 
+            //điền lại các chỉ số hàng cột 3x3 đã tồn tại 1 số
+
+            if(solve(row,col+1))return true;//nếu thỏa mãn các giá trị thì nhảy qua cột tiếp theo
+
+            a[row][col]=0; // bước quay lui xét trạng thái vè 0 để xây cấu hình tiếp theo
+            isInCol[col][i]=isInRow[row][i]=isIn3x3[row/3][col/3][i]=false;//cũng là xét cấu hình về 0 để xét tiếp cấu hình khác
         }
     }
     return false;
@@ -34,21 +37,25 @@ int32_t main() {
         freopen(TASK ".inp", "r", stdin);
         freopen(TASK ".out", "w", stdout);
     }
-    FOR(i, 0, 8) {
-        FOR(j, 0, 8) {
-            cin >> board[i][j];
-            ll num = board[i][j];
-            if (num) {
-                isInRow[i][num] = true;
-                isInCol[j][num] = true;
-                isInBox[i / 3][j / 3][num] = true;
+    FOR(i,0,8){
+        FOR(j,0,8){
+            cin>>a[i][j];
+            ll num = a[i][j];
+            if(num){
+                isInRow[i][num]=true;
+                isInCol[j][num]=true;
+                isIn3x3[i/3][j/3][num]=true;
+
+                //nếu như số này != 0 thì xét các trạng thái về true để khỏi xét
             }
-        }
+        } 
     }
-    if (solve()) {
-        FOR(i, 0, 8) {
-            FOR(j, 0, 8) cout << board[i][j] << ' ';
-            cout << '\n';
-        }
+    if(solve())
+    FOR(i,0,8){
+        FOR(j,0,8)
+            cout<<a[i][j]<<" ";
+        nl;
     }
 }
+
+

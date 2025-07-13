@@ -1,0 +1,24 @@
+10 cây 3 cuống đổi 1 nấm mới
+ăn cây 1 còn 9 cây có 1 cuống
+ăn cây 2 còn 8 cây có 2 cuống
+ăn cây 3 còn 7 cây có 3 cuống
+--> đủ 3 cuống = đổi 1 cây mới
+còn 8 cây nấm
+ăn cây 4 còn 7 cây có 1 cuống
+ăn cây 5 còn 6 cây có 2 cuống
+ăn cây 6 còn 5 cây có 3 cuống
+--> đủ 3 cuống = đổi 1 cây mới
+còn 6 cây nấm
+ăn cây 7 còn 5 cây có 1 cuống
+ăn cây 8 còn 4 cây có 2 cuống
+ăn cây 9 còn 3 cây có 3 cuống
+--> đủ 3 cuống = đổi 1 cây mới
+còn 4 cây nấm
+ăn cây 10 còn 3 cây có 1 cuống
+ăn cây 11 còn 2 cây có 2 cuống
+ăn cây 12 còn 1 cây có 3 cuống
+--> đủ 3 cuống = đổi 1 cây mới
+còn 2 cây nấm
+ăn cây 13 còn 1 cây có 1 cuống
+ăn cây 14 còn 0 cây có 2 cuống
+==> mất 14 ngày để ăn hết
