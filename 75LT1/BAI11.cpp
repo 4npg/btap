@@ -95,12 +95,12 @@ int main() {
     ll n;
     cin >> n;
     ll a[100][100]; 
-    pa(n,a);
-    print(n,a);
-   	pb(n,a);
-   	print(n,a);
-    pc(n,a);
-    print(n,a);
-    pd(n, a);
+    // pa(n,a);
+    // print(n,a);
+   	// pb(n,a);
+   	// print(n,a);
+    // pc(n,a);
+    // print(n,a);
+    pc(n, a);
 	print(n,a);
 }
