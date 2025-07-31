@@ -482,3 +482,98 @@ int32_t main() {
 }
 ```
 
+### BÀI 5: CHỈNH HỢP
+
+**Đề bài**:https://marisaoj.com/problem/546
+
+**Hiểu bài**: Bài này chỉ là tăng thêm yêu cầu in ra các hoán vị của sub array có độ dài k được lấy từ mảng ```A``` gồm các phần tử từ ```1``` đến ```n``` và có độ dài ```n``` mà thôi.
+
+**Thuật toán**
+
+1. Giữ nguyên thuật toán sinh quay lui như bài 4 và thêm vào phần in hoán vị của ```sub_array```, triển khai khá dễ dàng bằng việc cho thêm 1 ```set``` chứa các ```sub_array``` để đảm bảo kết quả in ra tuân theo thứ tự từ điển (lexicographic order). Bài này cũng được viết theo 2 style là bitwise và backtrack.
+
+**Pseudo code**:
+
+```md 
+    Vì giống b4 nên đéo viết nữa
+```
+
+**C++ code**:
+
+```cpp
+// authur : anphung
+// github : 4npg
+#include <bits/stdc++.h>
+using namespace std;
+#define int64 long long
+#define TASK "tenbai"
+#define el cout<<"\n"
+#define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
+#define FOR(i,a,b) for(int (i)=(a);i<=(b);++i)
+#define bit(mask,i) ((mask>>i)&1)
+#define pb push_back
+#define pob pop_back
+#define all(a) (a).begin(),(a).end()
+int n,k;
+set<vector<int>> allperms;
+vector<int> cur_subset;
+
+// backtrack style
+
+void Try(int pos){
+    int lastindex = ((cur_subset.empty()?0:cur_subset.back()));
+    FOR(i,lastindex+1,n){
+        cur_subset.pb(i);
+        if(cur_subset.size()==k){
+            vector<int> tmp = cur_subset;
+            sort(all(tmp));
+            do {
+                allperms.insert(tmp);
+            } while(next_permutation(all(tmp)));
+        }
+        else Try(pos+1);
+        cur_subset.pob();
+    }
+}
+
+// bitwise style
+
+void bitwiseop(){
+    vector<int> s(n);
+    set<vector<int>> allperms;
+    FOR(i,0,n-1)s[i] = i+1;
+    FOR(mask,0,(1<<n)-1){
+        if(__builtin_popcount(mask)==k){
+            vector<int> subset;
+            FOR(i,0,n-1){
+                if(bit(mask,i))subset.pb(s[i]);
+            }
+            sort(all(subset));
+            do {
+                allperms.insert(subset);
+            } while(next_permutation(all(subset)));
+        }
+    }
+
+    for(auto v:allperms){
+        for(auto x:v)cout<<x<<" ";
+        el;
+    }
+}
+
+int32_t main() {
+    fast;
+    if (fopen(TASK ".inp", "r")) {
+        freopen(TASK ".inp", "r", stdin);
+        freopen(TASK ".out", "w", stdout);
+    }
+    cin>>n>>k;
+    cur_subset.clear();
+    // Try(1);
+    // for(auto x:allperms){
+    //     for(auto v:x)cout<<v<<" ";
+    //     el;
+    // }
+    bitwiseop();
+}
+```

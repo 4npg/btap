@@ -1,63 +1,48 @@
-// authur : anphung
-// github : 4npg
 #include <bits/stdc++.h>
 using namespace std;
-#define int64 long long
-#define TASK "tenbai"
-#define el cout<<"\n"
 #define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
-#define FOR(i,a,b) for(int (i)=(a);i<=(b);++i)
-#define bit(mask,i) ((mask>>i)&1)
-#define pb push_back
-#define pob pop_back
+#define FOR(i,a,b) for(int i=(a);i<=(b);++i)
 
-int n,k;
-vector<int> cur_subset;
+int n, k, target;
+int a[20], assign[20], group_sum[10];
+bool found = false;
 
-// backtrack style
+void Try(int pos) {
+    if (found) return;
+    if (pos == n) {
+        for (int i = 0; i < k; ++i)
+            if (group_sum[i] != target) return;
 
-void print(){
-    for(auto x:cur_subset)cout<<x<<" ";
-    el;
-}
-
-void Try(int pos){
-    int lastindex = ((cur_subset.empty()?0:cur_subset.back()));
-    FOR(i,lastindex+1,n){
-        cur_subset.pb(i);
-        if(cur_subset.size()==k)print();
-        else Try(pos+1);
-        cur_subset.pob();
+        for (int i = 0; i < n; ++i)
+            cout << assign[i] + 1 << ' ';
+        cout << '\n';
+        found = true;
+        return;
     }
-}
 
-// bitwise style
-
-void bitwiseop(){
-    vector<int> s(n);
-    FOR(i,0,n-1)s[i] = i+1;
-    FOR(mask,0,(1<<n)-1){
-        if(__builtin_popcount(mask)==k){
-            vector<int> subset;
-            FOR(i,0,n-1){
-                if(bit(mask,i))subset.pb(s[i]);
-            }
-            for(auto x:subset)cout<<x<<" ";
-            el;
+    for (int g = 0; g < k; ++g) {
+        if (group_sum[g] + a[pos] <= target) {
+            assign[pos] = g;
+            group_sum[g] += a[pos];
+            Try(pos + 1);
+            group_sum[g] -= a[pos];
         }
     }
 }
 
-int32_t main() {
+int main() {
     fast;
-    if (fopen(TASK ".inp", "r")) {
-        freopen(TASK ".inp", "r", stdin);
-        freopen(TASK ".out", "w", stdout);
+    cin >> n >> k;
+    int sum = 0;
+    FOR(i, 0, n - 1) {
+        cin >> a[i];
+        sum += a[i];
     }
-    cin>>n>>k;
-    // cur_subset.clear();
-    // Try(1);
-    bitwiseop();
+    if (sum % k != 0) {
+        cout << "ze";
+        return 0;
+    }
+    target = sum / k;
+    Try(0);
+    if (!found) cout << "ze";
 }
-
-
