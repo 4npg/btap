@@ -384,4 +384,101 @@ int32_t main() {
 
 ```
 
+**
+--
+
+### BÀI 4: TẬP CON
+
+**Đề bài**:https://marisaoj.com/problem/323
+
+**Hiểu bài**: In ra các sub array có độ dài ```k``` được lấy từ array gồm các phần tử từ ```1``` đến ```n```.
+
+**Thuật toán**:
+
+1. Sử dụng thuật toán sinh dãy (quay lui), có thể làm theo 2 hướng là toán tử bitwise và đệ quy. Sở dĩ khi xây dựng các cấu hình sub array ta luôn có các phần tử sau luôn lớn hơn các phần tử trước, ta có thể xây dựng 1 biến ```last_index``` để lấy vị trí của phần tử cuối cùng được lấy hay có thể nói là lấy phần tử cuối cùng khi đó ta xây dựng các cấu hình bằng cách thử các phần tử còn lại từ ```last_index+1``` đến ```n```
+
+**Pseudo code**:
+
+``` md 
+    cur_subset[] = {rỗng};
+    function Try(pos){ //pos = 1
+        int last_index;
+        If cur_subset.empty() == true:
+            last_index = 0;
+        else: 
+            last_index = phần tử cuối của cur_subset;
+
+        for last_index+1 --> n
+            cur_subset[] add i
+            if sizeof(cur_subset[]) == k: print cur_subset; //Thỏa mãn điều kiện
+            else Try(pos+1);
+            cur_subset[] loại phần tử cuối mảng.
+    }
+```
+
+**C++ code**:
+
+``` cpp
+// authur : anphung
+// github : 4npg
+#include <bits/stdc++.h>
+using namespace std;
+#define int64 long long
+#define TASK "tenbai"
+#define el cout<<"\n"
+#define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
+#define FOR(i,a,b) for(int (i)=(a);i<=(b);++i)
+#define bit(mask,i) ((mask>>i)&1)
+#define pb push_back
+#define pob pop_back
+
+int n,k;
+vector<int> cur_subset;
+
+// backtrack style
+
+void print(){
+    for(auto x:cur_subset)cout<<x<<" ";
+    el;
+}
+
+void Try(int pos){
+    int lastindex = ((cur_subset.empty()?0:cur_subset.back()));
+    FOR(i,lastindex+1,n){
+        cur_subset.pb(i);
+        if(cur_subset.size()==k)print();
+        else Try(pos+1);
+        cur_subset.pob();
+    }
+}
+
+// bitwise style
+
+void bitwiseop(){
+    vector<int> s(n);
+    FOR(i,0,n-1)s[i] = i+1;
+    FOR(mask,0,(1<<n)-1){
+        if(__builtin_popcount(mask)==k){
+            vector<int> subset;
+            FOR(i,0,n-1){
+                if(bit(mask,i))subset.pb(s[i]);
+            }
+            for(auto x:subset)cout<<x<<" ";
+            el;
+        }
+    }
+}
+
+int32_t main() {
+    fast;
+    if (fopen(TASK ".inp", "r")) {
+        freopen(TASK ".inp", "r", stdin);
+        freopen(TASK ".out", "w", stdout);
+    }
+    cin>>n>>k;
+    // cur_subset.clear();
+    // Try(1);
+    bitwiseop();
+}
+```
 

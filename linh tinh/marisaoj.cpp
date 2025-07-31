@@ -8,38 +8,44 @@ using namespace std;
 #define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
 #define FOR(i,a,b) for(int (i)=(a);i<=(b);++i)
 #define bit(mask,i) ((mask>>i)&1)
-#define pb push_back 
-#define pob pob_back
+#define pb push_back
+#define pob pop_back
 
-int n;
-int64 k;
-int64 a[2000];
+int n,k;
+vector<int> cur_subset;
+
+// backtrack style
+
+void print(){
+    for(auto x:cur_subset)cout<<x<<" ";
+    el;
+}
+
+void Try(int pos){
+    int lastindex = ((cur_subset.empty()?0:cur_subset.back()));
+    FOR(i,lastindex+1,n){
+        cur_subset.pb(i);
+        if(cur_subset.size()==k)print();
+        else Try(pos+1);
+        cur_subset.pob();
+    }
+}
+
+// bitwise style
 
 void bitwiseop(){
-    bool flag = false;
+    vector<int> s(n);
+    FOR(i,0,n-1)s[i] = i+1;
     FOR(mask,0,(1<<n)-1){
-        int64 sum = 0;
-        FOR(i,0,n-1){
-            if(bit(mask,i))sum+=a[i];
-        }
-        if(sum==k){
-            flag = true;
-            break;
+        if(__builtin_popcount(mask)==k){
+            vector<int> subset;
+            FOR(i,0,n-1){
+                if(bit(mask,i))subset.pb(s[i]);
+            }
+            for(auto x:subset)cout<<x<<" ";
+            el;
         }
     }
-    cout<<((flag)?"YES":"NO");
-}
-bool flag = false;
-void Try(int i,int64 sum){
-    if(i==n){
-        if(sum==k)flag = true;
-        return;
-    }
-    if(flag)return;
-
-    Try(i+1,sum);
-    Try(i+1,sum+a[i]);
-
 }
 
 int32_t main() {
@@ -49,10 +55,9 @@ int32_t main() {
         freopen(TASK ".out", "w", stdout);
     }
     cin>>n>>k;
-    FOR(i,0,n-1)cin>>a[i];
-    flag = false;
-    Try(0,0);
-    cout<<((flag)?"YES":"NO");
+    // cur_subset.clear();
+    // Try(1);
+    bitwiseop();
 }
 
 
