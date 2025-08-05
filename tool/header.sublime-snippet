@@ -1,9 +1,10 @@
 <snippet>
 	<content><![CDATA[
-// authur : anphung iu bcu
+// authur : anphung
+// github : 4npg
 #include <bits/stdc++.h>
 using namespace std;
-#define ll long long
+#define int64 long long
 #define TASK "tenbai"
 #define el "\n"
 #define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)

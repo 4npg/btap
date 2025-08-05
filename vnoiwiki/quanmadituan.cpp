@@ -1,55 +1,38 @@
+// authur : anphung
+// github : 4npg
 #include <bits/stdc++.h>
 using namespace std;
-#define TASK "tenbai"
-#define nl cout << "\n"
+#define int64 long long
+#define TASK "quanmadituan"
+#define el cout<<"\n"
 #define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
-#define FOR(i, a, b) for (int (i) = (a); i <= (b); ++i)
+#define FOR(i,a,b) for(int (i)=(a);i<=(b);++i)
 
-int dx[8] = {2,1,-1,-2,-2,-1,1,2};
-int dy[8] = {1,2,2,1,-1,-2,-2,-1};
 
-bool isafe(int x, int y, vector<vector<int>> &board, int n, int m) {
-    return (x >= 0 && x < n && y >= 0 && y < m && board[x][y] == -1);
-}
+int n,m;
+int a[8][8];
+int dx[]={1,-1,-2,2,-2,2,-1,1};
+int dy[]={2,2,1,1,-1,-1,-2,-2};
 
-void print(const vector<vector<int>> &board, int n, int m) {
-    FOR(x, 0, n - 1) {
-        FOR(y, 0, m - 1) {
-            cout <<board[x][y] << " ";
+void Try(int cnt,int x,int y){
+    if(cnt==n*m){
+        FOR(i,1,n){
+            FOR(j,1,m){
+                cout<<a[i][j]<<" ";
+            }
+            el;
         }
-        nl;
+        exit(0);
     }
-}
-
-bool Try(int x, int y, int movei, vector<vector<int>> &board, int n, int m) {
-    if (movei > n * m) return true;
-
-    FOR(k, 0, 7) {
-        int next_x = x + dx[k];
-        int next_y = y + dy[k];
-        if (isafe(next_x, next_y, board, n, m)) {
-            board[next_x][next_y] = movei;
-            if (Try(next_x, next_y, movei + 1, board, n, m)) return true;
-            board[next_x][next_y] = -1; 
+    FOR(i,0,7){
+        int nx = x + dx[i];
+        int ny = y + dy[i];
+        if(nx>0&&ny>0&&nx<=n&&ny<=m&&a[nx][ny]==0){
+            a[nx][ny] = cnt+1;
+            Try(cnt+1,nx,ny);
+            a[nx][ny] = 0;
         }
     }
-    return false;
-}
-
-int solve() {
-    int n, m;
-    cin >> n >> m;
-    vector<vector<int>> board(n, vector<int>(m, -1));
-
-    board[0][0] = 1;
-
-    if (!Try(0, 0, 2, board, n, m)) {
-        cout << "NO";
-        return 0;
-    } else {
-        print(board, n, m);
-    }
-    return 1;
 }
 
 int32_t main() {
@@ -58,5 +41,13 @@ int32_t main() {
         freopen(TASK ".inp", "r", stdin);
         freopen(TASK ".out", "w", stdout);
     }
-    solve();
+    cin>>n>>m;
+    memset(a,0,sizeof(a));
+    // FOR(i,0,7){
+    //     cout<<a[i]<<" ";
+    // }
+    a[1][1] = 1;
+    Try(1,1,1);
 }
+
+

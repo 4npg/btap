@@ -1,48 +1,61 @@
+// authur : anphung
+// github : 4npg
 #include <bits/stdc++.h>
 using namespace std;
+#define int64 long long
+#define TASK "nquanhau"
+#define el cout<<"\n"
 #define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
-#define FOR(i,a,b) for(int i=(a);i<=(b);++i)
+#define FOR(i,a,b) for(int (i)=(a);i<=(b);++i)
+#define pb push_back
+#define pob pop_back
 
-int n, k, target;
-int a[20], assign[20], group_sum[10];
-bool found = false;
 
-void Try(int pos) {
-    if (found) return;
-    if (pos == n) {
-        for (int i = 0; i < k; ++i)
-            if (group_sum[i] != target) return;
+int n;
+bool isinCol[13],isinDiag1[26],isinDiag2[26];
+vector<int> curx;
+vector<int> cury;
+int cnt = 0;
 
-        for (int i = 0; i < n; ++i)
-            cout << assign[i] + 1 << ' ';
-        cout << '\n';
-        found = true;
-        return;
+void Try(int pos){
+    FOR(curCol,1,n){
+        int curDiag1 = pos + curCol;
+        int curDiag2 = pos - curCol + 13;
+
+        if(isinCol[curCol])continue;
+        if(isinDiag1[curDiag1])continue;
+        if(isinDiag2[curDiag2])continue;
+
+        curx.pb(pos);
+        cury.pb(curCol);
+
+        isinCol[curCol] = true;
+        isinDiag1[curDiag1] = true;
+        isinDiag2[curDiag2] = true;
+
+        if(curx.size()==n){
+            cnt++;
+        }else Try(pos+1);
+
+        curx.pob();
+        cury.pob();
+
+        isinCol[curCol] = false;
+        isinDiag1[curDiag1] = false;
+        isinDiag2[curDiag2] = false;
     }
-
-    for (int g = 0; g < k; ++g) {
-        if (group_sum[g] + a[pos] <= target) {
-            assign[pos] = g;
-            group_sum[g] += a[pos];
-            Try(pos + 1);
-            group_sum[g] -= a[pos];
-        }
-    }
+    
 }
 
-int main() {
+int32_t main() {
     fast;
-    cin >> n >> k;
-    int sum = 0;
-    FOR(i, 0, n - 1) {
-        cin >> a[i];
-        sum += a[i];
+    if (fopen(TASK ".inp", "r")) {
+        freopen(TASK ".inp", "r", stdin);
+        freopen(TASK ".out", "w", stdout);
     }
-    if (sum % k != 0) {
-        cout << "ze";
-        return 0;
-    }
-    target = sum / k;
-    Try(0);
-    if (!found) cout << "ze";
+    cin>>n;
+    Try(1);
+    cout<<cnt;
 }
+
+
