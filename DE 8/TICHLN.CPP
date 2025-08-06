@@ -3,21 +3,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define int64 long long
-#define TASK "tenbai"
+#define TASK "TICHLN"
 #define el cout<<"\n"
 #define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
 #define FOR(i,a,b) for(int (i)=(a);i<=(b);++i)
 
-int n;
-const int maxn = 1e6+5;
-int a[maxn];
-
-int gcd(int a,int b){
-    if(b==0)return a;
-    return gcd(b,a%b);
-}
-
-void sanguoc()
+int a[3];
 
 int32_t main() {
     fast;
@@ -25,17 +16,17 @@ int32_t main() {
         freopen(TASK ".inp", "r", stdin);
         freopen(TASK ".out", "w", stdout);
     }
-    sanguoc();
-    cin>>n;
-    int res = 0;
-    int tmp = 0;
-    for(int i=0;i<n;i++){
-        res = max(res,gcd(a[i],tmp));
+    int maxx=-1e6;
+    int minn=1e6;
+    int64 sum=0;
+    FOR(i,0,2){
         cin>>a[i];
-        tmp = a[i];
+        maxx=max(a[i],maxx);
+        minn=min(a[i],minn);
+        sum+=a[i]*1ll;
     }
-    cout<<res;
-    
+    cout<<(sum-maxx*1ll-minn*1ll)*maxx*1ll;
+
 }
 
 
