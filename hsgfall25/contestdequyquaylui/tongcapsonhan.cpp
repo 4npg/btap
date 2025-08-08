@@ -8,28 +8,53 @@ using namespace std;
 #define fast ios_base::sync_with_stdio(false); cin.tie(nullptr)
 #define f0(i,a,b) for(int (i)=(a);i<=(b);++i)
 
+int64 a,n,mod;
 
-int64 a,b,mod;
-int64 ipow(int64 a,int64 b,int64 mod){
-	int64 ans = 1;
-	while(b){
-		if(b&1)ans=(ans*a)%mod;
-		a=(a*a)%mod;
-		b>>=1;
-	}
-	return ans;
+int64 mul(int64 a,int64 b,int64 mod){
+    a %= mod;
+    int64 ans = 0;
+    while (b) {
+        if (b & 1) {
+            ans += a;
+            if (ans >= mod) ans -= mod;
+        }
+        a += a;
+        if (a >= mod) a -= mod;
+        b >>= 1;
+    }
+    return ans % mod;
 }
 
-int64 sum_pow(int64 a, int64 b, int64 mod) {
+int64 ipow(int64 a,int64 b,int64 mod){
+    int64 ans = 1 % mod;
+    a %= mod;
+    while (b) {
+        if (b & 1) ans = mul(ans, a, mod);
+        a = mul(a, a, mod);
+        b >>= 1;
+    }
+    return ans;
+}
+
+int64 sumpow(int64 a,int64 b,int64 mod){
+    if (mod == 1) return 0;
     if (b == 0) return 1 % mod;
     if (b & 1) {
-        return (sum_pow(a, b - 1, mod) + ipow(a, b, mod)) % mod;
+        int64 k = b / 2;
+        int64 s = sumpow(a, k, mod);
+        int64 p = ipow(a, k + 1, mod);
+        int64 t = (1 + p) % mod;
+        return mul(s, t, mod);
+    } else {
+        int64 k = b / 2;
+        int64 s = (k - 1 >= 0) ? sumpow(a, k - 1, mod) : 0;
+        int64 p = ipow(a, k + 1, mod);
+        int64 ak = ipow(a, k, mod);
+        int64 t = mul(s, (1 + p) % mod, mod);
+        t += ak;
+        if (t >= mod) t -= mod;
+        return t;
     }
-    int64 k = b / 2;
-    int64 first = sum_pow(a, k - 1, mod);
-    int64 second = sum_pow(a, k, mod);
-    int64 ak = ipow(a, k, mod);
-    return (first + (ak * second) % mod) % mod;
 }
 
 int32_t main() {
@@ -38,9 +63,6 @@ int32_t main() {
         freopen(TASK ".inp", "r", stdin);
         freopen(TASK ".out", "w", stdout);
     }
-    cin>>a>>b>>mod;
-    cout<<sum_pow(a,b,mod);
-
+    if (!(cin >> a >> n >> mod)) return 0;
+    cout << sumpow(a, n, mod);
 }
-
-
