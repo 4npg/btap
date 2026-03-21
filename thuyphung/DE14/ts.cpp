@@ -13,43 +13,57 @@ using namespace std;
 //     return l+rng()%(r-l+1);
 // }
 
-#define maxn 1000006
+#define maxn 200005
 #define lg 20
 #define inf (long long)4e18
 #define mod (long long)(1e9+7)
+#define DATA pair<long long, int>
 
-int n, k;
-int a[maxn];
+int n, m;
+vector<pair<int, long long>> a[maxn];
+long long d[maxn];
+
+void dijkstra(){
+    priority_queue<DATA, vector<DATA>, greater<DATA>> pq;
+    pq.emplace(0, 1);
+    memset(d, 0x3f, sizeof d);
+    d[1] = 0;
+    
+    while(pq.size()){
+        auto du = pq.top().first; auto u = pq.top().second;
+        pq.pop();
+
+        if(du > d[u])continue;
+
+        for(auto ele : a[u]){
+            int v = ele.first;
+            long long w = ele.second;
+
+            if(d[v] > d[u] + w){
+                d[v] = d[u] + w;
+                pq.emplace(d[v], v);
+            }
+        }
+    }
+}
 
 con_meo_dua_leo(){
     ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     // freopen(file".inp", "r", stdin);
     // freopen(file".out", "w", stdout);
 
-    cin>>n>>k;
-    f0(i, 0, n-1)cin>>a[i];
-
-    int m = n/k;
-
-    vector<vector<int>> gr(k);
-
-    f0(i, 0, n-1)gr[i%k].emplace_back(a[i]);
-
-    f0(i, 0, k-1)sort(gr[i].begin(), gr[i].end());
-
-
-    vector<int> res(n);
+    cin>>n>>m;
     f0(i, 0, m-1){
-        f0(j, 0, k-1){
-            res[i*k+j] = gr[j][i];
-        }
+        int u, v; cin>>u>>v;
+        long long w; cin>>w;
+        a[u].emplace_back(v, w);
     }
 
-    long long ans = 0;
-    f0(i, 0, n-k-1){
-        ans += abs(res[i] - res[i+k]);
+    dijkstra();
+
+    f0(u, 1, n){
+        cout<<d[u]<<" ";
     }
 
-    cout<<ans;
     cerr<<"\ntime elapsed: "<<TIME <<"s.\n";
 }
